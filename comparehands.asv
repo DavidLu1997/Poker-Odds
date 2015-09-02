@@ -9,35 +9,11 @@
 %-1 if first hand loses
 %0 if pot is split
 function winner = comparehands(a, b)
-%Extract raw card values, returning integer between 1 and 13
-avalues = mod(a - 1, 13) + 1;
-bvalues = mod(b - 1, 13) + 1;
 
-%Extract raw suits, returning integer between 1 and 4
-asuits = floor(a / 13 + 1);
-bsuits = floor(b / 13 + 1);
-
-disp(avalues);
-disp(asuits);
-disp(bvalues);
-disp(bsuits);
-
-%Check for straight
-astraight = sort(avalues);
-
-
-%Check for flush
-aflush = sort(asuits);
-if(aflush(5) - aflush(1) == 0)
-    aflush = true;
-else
-    aflush = false;
-end
-bflush = sort(bsuits);
-if(bflush(5) - bflush(1) == 0)
-    bflush = true;
-else
-    bflush = false;
+if(handrank(a) > handrank(b))
+   winner = 1;
+elseif(handrank(b) > handrank(a))
+    wi
 end
     
 winner = 0;
