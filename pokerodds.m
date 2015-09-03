@@ -1,4 +1,4 @@
-%Poker odds calculator written for Texas Hold 'em
+%Poker Odds Calculator written for Texas Hold 'em
 %David Lu
 %02/09/2015
 %Returns odds of the home hand winning/splitting the pot
@@ -59,6 +59,8 @@ function [win, split] = pokerodds(table, home, visit)
     while(true)
         %Randomly permute indices
         indices = randperm(length(deck), unknown);
+        
+        disp(indices);
         
         %Slot indices into unknown places
         tableCopy = table;

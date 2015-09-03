@@ -1,4 +1,4 @@
-%Poker hand comparator
+%Poker Hand Comparator for Texas Hold 'em
 %David Lu
 %02/09/2015
 %Compares two 5 card poker hands
