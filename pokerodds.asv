@@ -1,4 +1,4 @@
-%Poker odds calculator written for Texas Hold 'em
+%Poker Odds Calculator written for Texas Hold 'em
 %David Lu
 %02/09/2015
 %Returns odds of the home hand winning/splitting the pot
@@ -43,7 +43,7 @@ function [win, split] = pokerodds(table, home, visit)
     %Calculate number of permutations
     permutations = 1;
     for i = length(deck) - unknown + 1:length(deck)
-        disp(i);
+       disp(i);
        permutations = permutations * i; 
     end
     
@@ -53,7 +53,66 @@ function [win, split] = pokerodds(table, home, visit)
     %Until acceptable percentage difference is found
     %Define acceptable
     accept = 0.01;
+    previous = 1;
     
-    do
+    %Using ghetto do while
+    while(true)
+        %Randomly permute indices
+        indices = randperm(length(deck), unknown);
+        
+        disp(indices);
+        
+        %Slot indices into unknown places
+        tableCopy = table;
+        homeCopy = home;
+        visitCopy = visit;
+        
+        i = 1;
+        
+        for j = 1:length(tableCopy)
+           if(tableCopy(i) == 0)
+               tableCopy(i) = deck(indices(i));
+               i = i + 1;
+           end
+        end
+        
+        for j = 1:length(homeCopy)
+           if(homeCopy(i) == 0)
+               homeCopy(i) = deck(indices(i));
+               i = i + 1;
+           end
+        end
+        
+        for j = 1:length(visitCopy)
+           if(visitCopy(i) == 0)
+               visitCopy(i) = deck(indices(i));
+               i = i + 1;
+           end
+        end
+        
+        %Compare potential hands
+        %home hand
+        homeHand = bestHand(table, home);
+        
+        %Find number of other players
+        visiting = length(visit) / 2;
+        
+        for i = 1:visiting
+            hand = bestHand(table, [visit(i), visit(i+1)]);
+            
+        end
+        
+        %Check for acceptable difference 
+        if(abs(wins / total - previous) <= accept)
+            disp(wins / total);
+            disp('DONE');
+            break;
+        else
+            previous = wins / total;
+            disp(previous);
+        end
+    end
     
+    win = wins / total;
+    split = tie / total;
 end

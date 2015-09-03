@@ -11,11 +11,11 @@ function [win, split] = pokerodds(table, home, visit)
     
     %Count number of known cards
     known = nnz(table) + nnz(home) + nnz(visit);
-    disp(known);
+    %disp(known);
     
     %Count number of zeros
     unknown = length(table) + length(home) + length(visit) - known;
-    disp(unknown);
+    %disp(unknown);
     
     %Create deck
     deck = 1:52;
@@ -32,7 +32,7 @@ function [win, split] = pokerodds(table, home, visit)
     end
     
     %Display deck
-    disp(deck);
+    %disp(deck);
     
     %Initialize counters
     total = 0;
@@ -43,11 +43,11 @@ function [win, split] = pokerodds(table, home, visit)
     %Calculate number of permutations
     permutations = 1;
     for i = length(deck) - unknown + 1:length(deck)
-       disp(i);
+       %disp(i);
        permutations = permutations * i; 
     end
     
-    disp(permutations);
+    %disp(permutations);
     
     %Permute deck RANDOMLY
     %Until acceptable percentage difference is found
@@ -60,7 +60,7 @@ function [win, split] = pokerodds(table, home, visit)
         %Randomly permute indices
         indices = randperm(length(deck), unknown);
         
-        disp(indices);
+        %disp(indices);
         
         %Slot indices into unknown places
         tableCopy = table;
@@ -90,11 +90,31 @@ function [win, split] = pokerodds(table, home, visit)
            end
         end
         
-        %TODO Compare potential hands
+        %Compare potential hands
+        %home hand
+        homeHand = besthand(table, home);
         
+        %Find number of other players
+        visiting = length(visit) / 2;
+        
+        for i = 1:visiting
+            hand = besthand(table, [visit(i), visit(i+1)]);
+            comparing = comparehands(homeHand, hand);
+            if(comparing > 0)
+               wins = wins + 1;
+            elseif(comparehands(homeHand, hand) == 0)
+                tie = tie + 1;
+            else
+                loss = loss + 1;
+            end
+        end
+        
+        disp([wins, loss, tie]);
+        
+        total = total + 1;
         
         %Check for acceptable difference 
-        if(abs(wins / total - previous) <= accept)
+        if(abs(wins / total - previous) <= accept && total > 1 && (wins + loss + tie) > 0)
             disp(wins / total);
             disp('DONE');
             break;

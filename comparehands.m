@@ -13,8 +13,8 @@ function winner = comparehands(a, b)
     aRank = handrank(a);
     bRank = handrank(b);
     
-    disp(aRank);
-    disp(bRank);
+    %disp(aRank);
+    %disp(bRank);
 
     %Initialize winner
     winner = 0;

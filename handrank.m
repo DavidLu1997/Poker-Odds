@@ -29,9 +29,9 @@ function rank = handrank(a)
     %Extract raw suits, returning integer between 1 and 4
     suits = ceil(a / 13);
 
-    disp('Hand:');
-    disp(values);
-    disp(suits);
+    %disp('Hand:');
+    %disp(values);
+    %disp(suits);
 
     %Check for straight
     straight = sort(values);
