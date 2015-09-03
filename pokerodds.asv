@@ -10,8 +10,7 @@
 function [win, split] = pokerodds(table, home, visit)
     
     %Permute all possibilities
-    %Calculate winning possibilities
-    %Return probabilities
+    
     
     win = 0;
     split = 0;
