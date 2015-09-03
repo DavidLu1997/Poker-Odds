@@ -65,6 +65,30 @@ function [win, split] = pokerodds(table, home, visit)
         homeCopy = home;
         visitCopy = visit;
         
+        i = 1;
+        
+        for j = 1:length(tableCopy)
+           if(tableCopy(i) == 0)
+               tableCopy(i) = deck(indices(i));
+               i = i + 1;
+           end
+        end
+        
+        for j = 1:length(homeCopy)
+           if(homeCopy(i) == 0)
+               homeCopy(i) = deck(indices(i));
+               i = i + 1;
+           end
+        end
+        
+        for j = 1:length(visitCopy)
+           if(visitCopy(i) == 0)
+               visitCopy(i) = deck(indices(i));
+               i = i + 1;
+           end
+        end
+        
+        %TODO Compare potential hands
         
         
         %Check for acceptable difference 
