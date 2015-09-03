@@ -15,6 +15,16 @@ function rank = handrank(a)
 
     %Extract raw card values, returning integer between 1 and 13
     values = mod(a - 1, 13) + 1;
+    
+    %Fix aces to 14
+    for i = 1:5
+        if(values(i) == 1)
+            values(i) = 14;
+        end
+    end
+    
+    %Sort
+    values = sort(values);
 
     %Extract raw suits, returning integer between 1 and 4
     suits = ceil(a / 13);
