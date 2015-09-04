@@ -1,4 +1,6 @@
 %Ranks a 5 card poker hand
+%David Lu
+%02/09/2015
 %All cards represented as an integer from 1-52
 %Standard Texas Hold 'em hands used
 %Returns:

@@ -114,8 +114,8 @@ function [win, split, lose] = pokerodds(table, home, visit)
                 checker = -9999;
             elseif(comparing == 0)
                 checker = checker + 0;
-                %disp(homeHand);
-                %disp(hand);
+                printcards(homeHand);
+                printcards(hand);
             else
                 checker = checker + 1;
             end
