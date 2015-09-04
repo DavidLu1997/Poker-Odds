@@ -7,15 +7,8 @@
 %home - cards held by the player
 %visit - cards held by other players
 %All cards are represented by an integer 1-52, 0 denotes an unknown card
-
-function [win, split, lose] = pokerodds(table, home, visit)
+function [win, split] = pokerodds(table, home, visit)
     
-    %Minimum number of iterations
-    iter = 50;
-    %Acceptable error
-    accept = 0.001;
-
-
     %Count number of known cards
     known = nnz(table) + nnz(home) + nnz(visit);
     %disp(known);
@@ -39,7 +32,7 @@ function [win, split, lose] = pokerodds(table, home, visit)
     end
     
     %Display deck
-    disp(deck);
+    %disp(deck);
     
     %Initialize counters
     total = 0;
@@ -58,6 +51,8 @@ function [win, split, lose] = pokerodds(table, home, visit)
     
     %Permute deck RANDOMLY
     %Until acceptable percentage difference is found
+    %Define acceptable
+    accept = 0.01;
     previous = 1;
     
     %Using ghetto do while
@@ -75,79 +70,66 @@ function [win, split, lose] = pokerodds(table, home, visit)
         i = 1;
         
         for j = 1:length(tableCopy)
-           if(tableCopy(j) == 0)
-               tableCopy(j) = deck(indices(i));
+           if(tableCopy(i) == 0)
+               tableCopy(i) = deck(indices(i));
                i = i + 1;
            end
         end
         
         for j = 1:length(homeCopy)
-           if(homeCopy(j) == 0)
-               homeCopy(j) = deck(indices(i));
+           if(homeCopy(i) == 0)
+               homeCopy(i) = deck(indices(i));
                i = i + 1;
            end
         end
         
         for j = 1:length(visitCopy)
-           if(visitCopy(j) == 0)
-               visitCopy(j) = deck(indices(i));
+           if(visitCopy(i) == 0)
+               visitCopy(i) = deck(indices(i));
                i = i + 1;
            end
         end
         
         %Compare potential hands
+        %home hand
         homeHand = besthand(tableCopy, homeCopy);
         
         %Find number of other players
         visiting = length(visitCopy) / 2;
         
-        %Set checker
-        checker = 0;
+        %Set comparing
+        comparing = 0;
         
         %Check against every other hand
         for i = 1:visiting
             hand = besthand(tableCopy, [visitCopy(i), visitCopy(i+1)]);
             %disp(hand);
-            comparing = comparehands(homeHand, hand);
-            
-            if(comparing < 0)
-                checker = -9999;
-            elseif(comparing == 0)
-                checker = checker + 0;
-                disp(hand);
-            else
-                checker = checker + 1;
-            end
+            comparing = comparing + comparehands(homeHand, hand);
         end
         
         %Check win/loss/tie
-        if(checker < 0)
+        if(comparing < 0)
             loss = loss + 1;
-        elseif(checker == 0)
+        elseif(comparehands(homeHand, hand) == 0)
             tie = tie + 1;
         else
-            wins = wins + 1;
+            loss = loss + 1;
         end
         total = total + 1;
         
-        %disp([wins, loss, tie, total]);
+        disp([wins, loss, tie, total]);
         
         %Check for acceptable difference 
-        if(abs(wins / total - previous) <= accept && total > iter && (wins + loss + tie) > 0)
+        if(abs(wins / total - previous) <= accept && total > 1 && (wins + loss + tie) > 0)
+            disp(wins / total);
+            disp('DONE');
             break;
         else
             previous = wins / total;
+            disp(previous);
         end
     end
     
     win = wins / total;
     split = tie / total;
-    lose = loss / total;
-    
-    disp('Win:');
-    disp(win);
-    disp('Split:');
-    disp(split);
-    disp('Loss:');
-    disp(lose);
 end

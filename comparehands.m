@@ -12,10 +12,7 @@ function winner = comparehands(a, b)
     %Get hand ranks
     aRank = handrank(a);
     bRank = handrank(b);
-    
-    %disp(aRank);
-    %disp(bRank);
-
+  
     %Initialize winner
     winner = 0;
 
@@ -91,13 +88,13 @@ function winner = comparehands(a, b)
             aTrip = aValues(3);
             if(aValues(3) - aValues(1) == 0)
                 aDoub = aValues(4);
-            else(aValues(5) - aValues(3) == 0)
+            elseif(aValues(5) - aValues(3) == 0)
                 aDoub = aValues(2);
             end
             bTrip = bValues(3);
             if(bValues(3) - bValues(1) == 0)
                 bDoub = bValues(4);
-            else(bValues(5) - bValues(3) == 0)
+            elseif(bValues(5) - bValues(3) == 0)
                 bDoub = bValues(2);
             end
 
@@ -178,7 +175,7 @@ function winner = comparehands(a, b)
             elseif(bValues(2) == bValues(3) && bValues(4) == bValues(5))
                 bKicker = bValues(1);
             else
-                bKicker = bValues(3)
+                bKicker = bValues(3);
             end
 
             %Compare
