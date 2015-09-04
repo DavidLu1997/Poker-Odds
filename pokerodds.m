@@ -11,9 +11,9 @@
 function [win, split, lose] = pokerodds(table, home, visit)
     
     %Minimum number of iterations
-    iter = 50;
+    iter = 1000;
     %Acceptable error
-    accept = 0.001;
+    accept = 0.0001;
 
 
     %Count number of known cards
@@ -39,7 +39,7 @@ function [win, split, lose] = pokerodds(table, home, visit)
     end
     
     %Display deck
-    disp(deck);
+    %disp(deck);
     
     %Initialize counters
     total = 0;
@@ -114,7 +114,8 @@ function [win, split, lose] = pokerodds(table, home, visit)
                 checker = -9999;
             elseif(comparing == 0)
                 checker = checker + 0;
-                disp(hand);
+                %disp(homeHand);
+                %disp(hand);
             else
                 checker = checker + 1;
             end
@@ -133,7 +134,7 @@ function [win, split, lose] = pokerodds(table, home, visit)
         %disp([wins, loss, tie, total]);
         
         %Check for acceptable difference 
-        if(abs(wins / total - previous) <= accept && total > iter && (wins + loss + tie) > 0)
+        if(abs(wins / total - previous) <= accept && total >= iter && (wins + loss + tie) > 0)
             break;
         else
             previous = wins / total;
@@ -144,6 +145,8 @@ function [win, split, lose] = pokerodds(table, home, visit)
     split = tie / total;
     lose = loss / total;
     
+    disp('Iterations:');
+    disp(total);
     disp('Win:');
     disp(win);
     disp('Split:');

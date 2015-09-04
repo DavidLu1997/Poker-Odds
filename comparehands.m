@@ -49,11 +49,11 @@ function winner = comparehands(a, b)
         %Simple high card comparison, for high card, straight, flush, and
         %straight flush
         if((aRank == 1 || aRank == 5) || (aRank == 6 || aRank == 9))
-            for i = 5:1
-               if(aValues(i) > bValues(i))
+            for i = 1:5
+               if(aValues(6-i) > bValues(6-i))
                    winner = 1;
                    break;
-               elseif(aValues(i) < bValues(i))
+               elseif(aValues(6-i) < bValues(6-i))
                    winner = -1;
                    break;
                end
