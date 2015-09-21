@@ -44,8 +44,10 @@ function printcards(cards)
         else
             suit(i) = 'C';
         end
-        
-        fprintf('%s%s ', value(i), suit(i));
+    end
+    
+    for i = 1:length(cards)
+       fprintf('%s%s ', value(i), suit(i)); 
     end
     
     fprintf('\n');
