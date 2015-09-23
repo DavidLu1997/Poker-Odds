@@ -3,11 +3,6 @@
 %02/09/2015
 %Takes a vector of integers
 function printcards(cards)
-    
-    %Create value and suit vectors
-    value = zeros(length(cards));
-    suit = zeros(length(cards));
-    
     %Get values
     value = mod(cards - 1, 13) + 1;
     
