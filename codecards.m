@@ -32,5 +32,4 @@ function cards = codecards(a)
         end
     end
     
-    return cards;
 end
