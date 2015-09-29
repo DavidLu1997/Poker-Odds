@@ -3,9 +3,12 @@
 %27/09/2015
 %Takes a vector of strings
 function cards = codecards(a)
-    cards = zeros(length(a));
+    cards = zeros(size(a, 1));
     
-    for i = 1:length(a)
+    for i = 1:size(a, 1);
+        if(a(i) == 0)
+            continue;
+        end
         switch(a(i, 1))
             case 'T'
                 cards(i) = cards(i) + 10;
