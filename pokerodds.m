@@ -18,11 +18,9 @@ function [win, split, lose] = pokerodds(table, home, visit)
 
     %Count number of known cards
     known = nnz(table) + nnz(home) + nnz(visit);
-    %disp(known);
     
     %Count number of zeros
     unknown = length(table) + length(home) + length(visit) - known;
-    %disp(unknown);
     
     %Create deck
     deck = 1:52;
@@ -37,10 +35,7 @@ function [win, split, lose] = pokerodds(table, home, visit)
     for i = 1:length(visit)
         deck = deck(deck~=visit(i));
     end
-    
-    %Display deck
-    %disp(deck);
-    
+
     %Initialize counters
     total = 0;
     wins = 0;
@@ -50,7 +45,6 @@ function [win, split, lose] = pokerodds(table, home, visit)
     %Calculate number of permutations
     permutations = 1;
     for i = length(deck) - unknown + 1:length(deck)
-       %disp(i);
        permutations = permutations * i; 
     end
     
@@ -64,8 +58,6 @@ function [win, split, lose] = pokerodds(table, home, visit)
     while(true)
         %Randomly permute indices
         indices = randperm(length(deck), unknown);
-        
-        %disp(indices);
         
         %Slot indices into unknown places
         tableCopy = table;
@@ -107,15 +99,12 @@ function [win, split, lose] = pokerodds(table, home, visit)
         %Check against every other hand
         for i = 1:visiting
             hand = besthand(tableCopy, [visitCopy(i), visitCopy(i+1)]);
-            %disp(hand);
             comparing = comparehands(homeHand, hand);
             
             if(comparing < 0)
                 checker = -9999;
             elseif(comparing == 0)
                 checker = checker + 0;
-                printcards(homeHand);
-                printcards(hand);
             else
                 checker = checker + 1;
             end
@@ -130,8 +119,6 @@ function [win, split, lose] = pokerodds(table, home, visit)
             wins = wins + 1;
         end
         total = total + 1;
-        
-        %disp([wins, loss, tie, total]);
         
         %Check for acceptable difference 
         if(abs(wins / total - previous) <= accept && total >= iter && (wins + loss + tie) > 0)
