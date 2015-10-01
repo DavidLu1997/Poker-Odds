@@ -123,7 +123,7 @@ function [win, split, lose] = pokerodds(table, home, visit)
         if(abs(wins / total - previous) <= accept && total >= iter && (wins + loss + tie) > 0)
             break;
         else
-            previous = wins / total;
+            previous = (previous + wins / total) / 2;
         end
     end
     
