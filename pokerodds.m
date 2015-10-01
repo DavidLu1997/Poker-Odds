@@ -14,8 +14,7 @@ function [win, split, lose] = pokerodds(table, home, visit)
     iter = 5000;
     %Acceptable error
     accept = 0.0001;
-
-
+    
     %Count number of known cards
     known = nnz(table) + nnz(home) + nnz(visit);
     
@@ -131,13 +130,4 @@ function [win, split, lose] = pokerodds(table, home, visit)
     win = wins / total;
     split = tie / total;
     lose = loss / total;
-    
-    disp('Iterations:');
-    disp(total);
-    disp('Win:');
-    disp(win);
-    disp('Split:');
-    disp(split);
-    disp('Loss:');
-    disp(lose);
 end
