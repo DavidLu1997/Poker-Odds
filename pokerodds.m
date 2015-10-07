@@ -47,13 +47,10 @@ function [win, split, lose] = pokerodds(table, home, visit)
        permutations = permutations * i; 
     end
     
-    %disp(permutations);
-    
-    %Permute deck RANDOMLY
-    %Until acceptable percentage difference is found
+    %Permutes deck until acceptable percentage difference is found
     previous = 1;
     
-    %Using ghetto do while
+    %Using do while
     while(true)
         %Randomly permute indices
         indices = randperm(length(deck), unknown);
