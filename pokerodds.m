@@ -11,7 +11,7 @@
 function [win, split, lose] = pokerodds(table, home, visit)
     
     %Minimum number of iterations
-    iter = 5000;
+    iter = 1000;
     %Acceptable error
     accept = 0.0001;
     
