@@ -64,8 +64,7 @@ function rank = handrank(a)
     else
         values = sort(values);
     
-        %4oaK, difference between largest and 4th largest is 0 or difference
-        %between 2nd and 5th is 0
+        %4oaK, difference between largest and 4th largest is 0 or difference between 2nd and 5th is 0
         if(values(5) - values(2) == 0 || values(4) - values(1) == 0)
             rank = 8;
         %FH, difference between largest and 3rd is 0, and smallest and 4th is
