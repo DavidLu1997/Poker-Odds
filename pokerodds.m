@@ -42,10 +42,7 @@ function [win, split, lose] = pokerodds(table, home, visit)
     tie = 0;
     
     %Calculate number of permutations
-    permutations = 1;
-    for i = length(deck) - unknown + 1:length(deck)
-       permutations = permutations * i; 
-    end
+    permutations = numcombo(table, home, visit, 52);
     
     %Permutes deck until acceptable percentage difference is found
     previous = 1;

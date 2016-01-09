@@ -13,12 +13,12 @@ function combinations = numcombo(table, home, visit, cards)
     know3 = 0;
     
     for i = 1:length(table)
-       if(table(i) == 0)
+       if(table(i) ~= 0)
            know1 = know1 + 1;
        end
     end
     for i = 1:length(home)
-       if(home(i) == 0)
+       if(home(i) ~= 0)
            know2 = know2 + 1;
        end
     end
